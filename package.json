@@ -4,7 +4,8 @@
   "description": "Server for notion integrations using Express.js",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "dev": "node server.js",
+    "start": "netlify-lambda serve functions"
   },
   "keywords": [
     "node",
@@ -16,6 +17,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "serverless-http": "^3.2.0"
   }
 }
