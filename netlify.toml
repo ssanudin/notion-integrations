@@ -1,6 +1,5 @@
 [build]
   command = "echo Building functions"
-  publish = "dist"
   functions = "functions"
   include = [
     "views/**"
