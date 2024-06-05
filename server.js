@@ -10,20 +10,21 @@ app.use(express.json());
 
 // Set the Access-Control-Allow-Origin header to allow access from any domain
 app.use((request, response, next) => {
-  if (process.env.NODE_ENV === "development") {
-    response.setHeader("Access-Control-Allow-Origin", "*");
-  } else {
-    let allowedOrigins = process.env.ALLOWED_ORIGINS;
-    if (typeof allowedOrigins !== "undefined") {
-      allowedOrigins = allowedOrigins.split(",");
-      const origin = request.headers.origin;
-      if (allowedOrigins.includes(origin)) {
-        response.setHeader("Access-Control-Allow-Origin", origin);
-      }
-    } else {
-      response.setHeader("Access-Control-Allow-Origin", "*");
-    }
-  }
+  // if (process.env.NODE_ENV === "development") {
+  //   response.setHeader("Access-Control-Allow-Origin", "*");
+  // } else {
+  //   let allowedOrigins = process.env.ALLOWED_ORIGINS;
+  //   if (typeof allowedOrigins !== "undefined") {
+  //     allowedOrigins = allowedOrigins.split(",");
+  //     const origin = request.headers.origin;
+  //     if (allowedOrigins.includes(origin)) {
+  //       response.setHeader("Access-Control-Allow-Origin", origin);
+  //     }
+  //   } else {
+  //     response.setHeader("Access-Control-Allow-Origin", "*");
+  //   }
+  // }
+  response.setHeader("Access-Control-Allow-Origin", "*");
   next();
 });
 
