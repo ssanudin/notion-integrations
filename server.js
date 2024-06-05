@@ -9,14 +9,13 @@ app.use(express.static("public"));
 app.use(express.json());
 
 const router = express.Router();
-app.use("/.netlify/functions/api/", router);
 
 // Index
-app.get("/", function (request, response) {
+router.get("/", function (request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 // Send Wedding Messages
-app.post("/wedding-msg", async function (request, response) {
+router.post("/wedding-msg", async function (request, response) {
   const dbID = process.env.NOTION_PAGE_ID_WEDDING_MSG;
   const { name, msg } = request.body;
 
@@ -66,6 +65,8 @@ app.post("/wedding-msg", async function (request, response) {
     response.json({ message: "error", error });
   }
 });
+
+app.use("/.netlify/functions/api/", router);
 
 const listener = app.listen(process.env.PORT || 1001, () => {
   console.log(`Server started on port ${listener.address().port}`);
