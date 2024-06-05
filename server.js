@@ -65,6 +65,6 @@ app.post("/wedding-msg", async function (request, response) {
   }
 });
 
-const listener = app.listen(process.env.PORT, () => {
+const listener = app.listen(process.env.PORT || 1001, () => {
   console.log(`Server started on port ${listener.address().port}`);
 });
