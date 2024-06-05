@@ -12,7 +12,11 @@ const router = express.Router();
 
 // Index
 router.get("/", function (request, response) {
-  response.sendFile(__dirname + "/views/index.html");
+  const _path =
+    process.env.NODE_ENV === "development"
+      ? __dirname + "/functions"
+      : __dirname;
+  response.sendFile(_path + "/views/index.html");
 });
 // Send Wedding Messages
 router.post("/wedding-msg", async function (request, response) {
@@ -66,7 +70,7 @@ router.post("/wedding-msg", async function (request, response) {
   }
 });
 
-app.use("/.netlify/functions/api/", router);
+app.use("/", router);
 
 if (process.env.NODE_ENV === "development") {
   const listener = app.listen(process.env.PORT || 1001, () => {
