@@ -13,10 +13,18 @@ app.use((request, response, next) => {
   if (process.env.NODE_ENV === "development") {
     response.setHeader("Access-Control-Allow-Origin", "*");
   } else {
-    const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",");
-    const origin = request.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-      response.setHeader("Access-Control-Allow-Origin", origin);
+    let allowedOrigins = process.env.ALLOWED_ORIGINS;
+    if (
+      typeof allowedOrigins !== "undefined" &&
+      Array.isArray(allowedOrigins)
+    ) {
+      allowedOrigins = allowedOrigins.split(",");
+      const origin = request.headers.origin;
+      if (allowedOrigins.includes(origin)) {
+        response.setHeader("Access-Control-Allow-Origin", origin);
+      }
+    } else {
+      response.setHeader("Access-Control-Allow-Origin", "*");
     }
   }
   next();
