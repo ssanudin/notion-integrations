@@ -8,6 +8,9 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 app.use(express.static("public"));
 app.use(express.json());
 
+const router = express.Router();
+app.use("/.netlify/functions/api/", router);
+
 // Index
 app.get("/", function (request, response) {
   response.sendFile(__dirname + "/views/index.html");
@@ -67,3 +70,7 @@ app.post("/wedding-msg", async function (request, response) {
 const listener = app.listen(process.env.PORT || 1001, () => {
   console.log(`Server started on port ${listener.address().port}`);
 });
+
+module.exports = {
+  app: app,
+};
