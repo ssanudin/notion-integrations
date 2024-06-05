@@ -12,11 +12,11 @@ const router = express.Router();
 
 // Index
 router.get("/", function (request, response) {
-  const _path =
-    process.env.NODE_ENV === "development"
-      ? __dirname + "/functions"
-      : __dirname;
-  response.sendFile(_path + "/views/index.html");
+  if (process.env.NODE_ENV === "development") {
+    response.sendFile(__dirname + "/views/index.html");
+  } else {
+    res.send("App is running..");
+  }
 });
 // Send Wedding Messages
 router.post("/wedding-msg", async function (request, response) {
