@@ -8,6 +8,20 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 app.use(express.static("public"));
 app.use(express.json());
 
+// Set the Access-Control-Allow-Origin header to allow access from any domain
+app.use((request, response, next) => {
+  if (process.env.NODE_ENV === "development") {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+  } else {
+    const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",");
+    const origin = request.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      response.setHeader("Access-Control-Allow-Origin", origin);
+    }
+  }
+  next();
+});
+
 const router = express.Router();
 
 // Index
