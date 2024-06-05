@@ -70,7 +70,7 @@ router.post("/wedding-msg", async function (request, response) {
   }
 });
 
-app.use("/", router);
+app.use("/api", router);
 
 if (process.env.NODE_ENV === "development") {
   const listener = app.listen(process.env.PORT || 1001, () => {
