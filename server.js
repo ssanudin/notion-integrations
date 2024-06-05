@@ -15,7 +15,7 @@ router.get("/", function (request, response) {
   if (process.env.NODE_ENV === "development") {
     response.sendFile(__dirname + "/views/index.html");
   } else {
-    res.send("App is running..");
+    response.send("App is running..");
   }
 });
 // Send Wedding Messages
