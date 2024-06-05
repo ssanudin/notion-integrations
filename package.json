@@ -1,0 +1,21 @@
+{
+  "name": "notion-integrations",
+  "version": "1.0.0",
+  "description": "Server for notion integrations using Express.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "notion",
+    "express"
+  ],
+  "author": "Sanudin",
+  "license": "ISC",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
