@@ -14,10 +14,7 @@ app.use((request, response, next) => {
     response.setHeader("Access-Control-Allow-Origin", "*");
   } else {
     let allowedOrigins = process.env.ALLOWED_ORIGINS;
-    if (
-      typeof allowedOrigins !== "undefined" &&
-      Array.isArray(allowedOrigins)
-    ) {
+    if (typeof allowedOrigins !== "undefined") {
       allowedOrigins = allowedOrigins.split(",");
       const origin = request.headers.origin;
       if (allowedOrigins.includes(origin)) {
