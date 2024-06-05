@@ -68,9 +68,11 @@ router.post("/wedding-msg", async function (request, response) {
 
 app.use("/.netlify/functions/api/", router);
 
-const listener = app.listen(process.env.PORT || 1001, () => {
-  console.log(`Server started on port ${listener.address().port}`);
-});
+if (process.env.NODE_ENV === "development") {
+  const listener = app.listen(process.env.PORT || 1001, () => {
+    console.log(`Server started on port ${listener.address().port}`);
+  });
+}
 
 module.exports = {
   app: app,
