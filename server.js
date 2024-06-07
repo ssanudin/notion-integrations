@@ -90,6 +90,50 @@ router.post("/wedding-msg", async function (request, response) {
     response.json({ message: "error", error });
   }
 });
+// Get Wedding Message
+router.post("/get-wedding-msg", async function (request, response) {
+  const dbID = process.env.NOTION_PAGE_ID_WEDDING_MSG;
+  const { name } = request.body;
+
+  try {
+    const wedMsg = await notion.databases.query({
+      database_id: dbID,
+      filter: {
+        and: [
+          {
+            property: "Name",
+            rich_text: {
+              is_not_empty: true,
+            },
+          },
+          {
+            property: "Message",
+            rich_text: {
+              is_not_empty: true,
+            },
+          },
+        ],
+      },
+      sorts: [
+        {
+          timestamp: "created_time",
+          direction: "descending",
+        },
+      ],
+    });
+
+    const results = wedMsg.results.map((res) => {
+      return {
+        Name: res.properties["Name"].title[0].text.content,
+        Message: res.properties["Message"].rich_text[0].text.content,
+        "Created time": res.properties["Created time"].created_time,
+      };
+    });
+    response.json({ message: "success!", data: results });
+  } catch (error) {
+    response.json({ message: "error", error });
+  }
+});
 
 app.use("/", router);
 
